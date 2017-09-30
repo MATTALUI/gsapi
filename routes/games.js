@@ -9,9 +9,20 @@ router.get('/',function(req,res,next){
     res.send(allGames);
   });
 });
+router.get('/:id', function(req,res,next){
+  Game.find({_id: req.params.id},(error,game)=>{
+    res.send(game);
+  });
+});
 
 router.post('/', function(req,res,next){
-  minecraft.save((error, game)=>{
+  let newGame = new Game(req.body);
+  newGame.save((error,game)=>{
+    res.send(game)
+  })
+});
+router.delete('/:id', function(req,res,next){
+  Game.find({_id: req.params.id}).remove((error, game)=>{
     res.send(game)
   })
 });

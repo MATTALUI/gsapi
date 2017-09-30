@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+// mongoimport -d gameShop -c games  --file ./db/gameSeeds.js --jsonArray
+
 var gameSchema = mongoose.Schema({
   title: String,
   price: Number,
@@ -6,9 +8,7 @@ var gameSchema = mongoose.Schema({
   'ESRB-rating': String,
   rating: Number,
   genre: String
-});
-
-
+}, {collection: 'games', versionKey: null});
 
 
 

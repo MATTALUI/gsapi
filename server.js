@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const app = express();
 const gamesRoute = require('./routes/games.js');
 mongoose.connect('mongodb://localhost:27017/gameShop');
@@ -9,6 +10,8 @@ const db = mongoose.connection;
 
 
 db.on('open',()=>{
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
 
 
   app.get('/', function(req,res,next){
