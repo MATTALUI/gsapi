@@ -1,3 +1,7 @@
+'use strict';
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -13,7 +17,18 @@ db.on('open',()=>{
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
 
-
+  app.use('/', function(req,res,next){
+    let auth = req.headers.authorization.split(' ')[1];
+    let translated = new Buffer(auth, 'base64').toString('ascii');
+    let username = translated.split(':')[0];
+    let password = translated.split(':')[1];
+    // console.log('Username: ',username,'\nPassword: ',password);
+    if(username != process.env.USERNAME || password != process.env.PASSWORD){
+      res.sendStatus(401)
+    }else{
+      next();
+    }
+  });
   app.get('/', function(req,res,next){
     res.send('This is the API for gameShop.')
   })
