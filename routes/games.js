@@ -21,10 +21,17 @@ router.post('/', function(req,res,next){
     res.send(game)
   })
 });
-router.delete('/:id', function(req,res,next){
-  Game.find({_id: req.params.id}).remove((error, game)=>{
-    res.send(game)
+
+router.patch('/:id',function(req,res,next){
+  Game.findByIdAndUpdate(req.params.id,req.body,(error,effected)=>{
+    res.send(effected);
   })
+});
+
+router.delete('/:id', function(req,res,next){
+  Game.findByIdAndRemove(req.params.id, (error,deleted)=>{
+    res.send(deleted);
+  });
 });
 
 

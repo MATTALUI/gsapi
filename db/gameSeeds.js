@@ -25,5 +25,12 @@
     "ESRB-rating": "Everyone",
     "rating": 4,
     "genre": "Survival Sandbox"
+  },{
+  	"title": "The Legend of Zelda: Breath of the Wild",
+  	"price": 59.99,
+  	"platforms": ["switch"],
+  	"ESRB-rating": "Everyone",
+  	"rating": 5,
+  	"genre": "Action Adventure"
   }
 ]
