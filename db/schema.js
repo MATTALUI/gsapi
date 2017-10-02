@@ -8,7 +8,8 @@ var gameSchema = mongoose.Schema({
   'ESRB-rating': String,
   rating: Number,
   genre: String,
-  cover: String
+  cover: String,
+  description: String
 }, {collection: 'games', versionKey: null});
 
 

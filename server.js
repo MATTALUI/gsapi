@@ -19,6 +19,12 @@ db.on('open',()=>{
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
 
+  app.use(function (req, res, next) {
+    res.removeHeader("X-Powered-By");
+    res.set({'X-who-stole-the-cookies-from-the-cookie-jar': 'matt'});
+    next();
+  });
+
   app.use('/', function(req,res,next){
     if(!req.headers.authorization){
       res.sendStatus(401)
@@ -36,8 +42,8 @@ db.on('open',()=>{
     }
   });
   app.get('/', function(req,res,next){
-    res.send('This is the API for gameShop.')
-  })
+    res.send('This is the API for gameShop.');
+  });
 
 
   app.use('/games', gamesRoute);
